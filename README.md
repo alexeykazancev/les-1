@@ -8,7 +8,7 @@ home work les 1 linux adv
 3. выбираем из списка нужноый ид образа, в нашем случае убунту 20:  yc compute image get-latest-from-family ubuntu-2004-lts --folder-id standard-images
 4. копируем из гита все файлы https://github.com/alexeykazancev/les-1.git
 5. открываем файл main.tf подставляем туда свои: cloud_id  = ""  folder_id = ""  zone = "ru-central1-b"
-6. выполняем terraform plan , затем terraform apply
+6. выполняем terraform plan -var-file=secret.tfvars , затем terraform apply -var-file=secret.tfvars , в файле сикрет впишите свой токен
 7. при установке импортируется рса ключ, поэтому пароля при входе не требуется.
 8. проверяем логин на вход ssh ubuntu@ip
 9. далее выполняем установку нжинкс, переходим в папку ансибл, проверяем ip в файле хостс и выполняем установку: ansible-playbook play.yml -i hosts
@@ -43,4 +43,4 @@ Commercial support is available at
 будет примерно такой вывод
 
 12. для удаления нжинкс выполнить команду ansible-playbook -i hosts nginx_uninstall.yml -u ubuntu
-13. для удаления вм , выйти на уровень выше и выполнить команду terraform destroy
+13. для удаления вм , выйти на уровень выше и выполнить команду terraform destroy -var-file=secret.tfvars

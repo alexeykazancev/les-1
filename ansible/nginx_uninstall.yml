@@ -3,7 +3,13 @@
   tasks:
     - name: stop nginx
       service:
-          name: nginx
-          state: stopped
+        name: nginx
+        state: stopped
+      become: true
     - name: ensure nginx is not installed
-      apt: name=nginx state=absent
+      apt: 
+        name: nginx 
+        state: absent
+        purge: true
+        autoremove: true
+      become: true

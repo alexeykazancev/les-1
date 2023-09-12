@@ -9,10 +9,16 @@ terraform {
 
 provider "yandex" {
 
+  token     = var.token
   cloud_id  = "b1gmf70r4gqg487nkf9v"
   folder_id = "b1gvj4lgjq7227mhthmq"
   zone      = "ru-central1-b"
 }
+
+variable "token" {
+  type        = string
+  sensitive   = true
+  }
 
 resource "yandex_compute_instance" "vm-les-1" { 
   name = "vm-les-1"
