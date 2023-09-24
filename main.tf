@@ -9,16 +9,11 @@ terraform {
 
 provider "yandex" {
 
-  token     = var.token
-  cloud_id  = "b1gmf70r4gqg487nkf9v"
-  folder_id = "b1gvj4lgjq7227mhthmq"
-  zone      = "ru-central1-b"
+  token     = var.yc_token
+  cloud_id  = var.cloud_id
+  folder_id = var.folder_id
+  zone      = var.zone
 }
-
-variable "token" {
-  type        = string
-  sensitive   = true
-  }
 
 resource "yandex_compute_instance" "vm-les-1" { 
   name = "vm-les-1"
@@ -31,12 +26,12 @@ resource "yandex_compute_instance" "vm-les-1" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd8pqclrbi85ektgehlf" # ОС (Ubuntu, 20.04 LTS)
+      image_id = var.image_id # ОС (Ubuntu, 20.04 LTS)
     }
   }
 
   network_interface {
-    subnet_id = "e2lqqubbgvcve8cml39e" # одна из дефолтных подсетей
+    subnet_id = var.subnet_id # одна из дефолтных подсетей
     nat = true # автоматически установить динамический ip
   }
   
